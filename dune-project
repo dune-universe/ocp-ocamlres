@@ -17,12 +17,10 @@
 
 (documentation "http://github.com/OCamlPro/ocp-ocamlres")
 
-(generate_opam_files true)
-
 (package
  (name ocp-ocamlres)
- (synopsis "OCaml bindings for Python")
- (description "OCaml bindings for Python 2 and Python 3")
+ (synopsis "A simple tool and library to embed files and directories inside an OCaml executables")
+ (description "A tool ocp-ocamlres to embed files and directories inside OCaml executables, with a companion library ocplib-ocamlres to manipulate them at run-time.")
  (depends
   (ocaml (>= 4.08.0))
   pprint

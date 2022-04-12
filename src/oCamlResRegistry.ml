@@ -116,15 +116,15 @@ module PredefOptions = struct
 end
 
 module ExtensionDispatcherSubFormat = struct
-  let find_subformat (_dirs, name) =
+  let find_subformat (dirs, name) =
     (try match name with
-       | Some (_name, Some ext) -> SM.find ext !PredefOptions.subformats
+       | Some (name, Some ext) -> SM.find ext !PredefOptions.subformats
        | _ -> raise Not_found
      with Not_found -> (module Raw))
 
   type t = string
-  let from_raw _path data = data
-  let to_raw _path data = data
+  let from_raw path data = data
+  let to_raw path data = data
 
   let pprint path data =
     let module SF = (val find_subformat path) in
@@ -157,11 +157,11 @@ module OCaml = struct
     match !PredefOptions.output_file with
     | None ->
       let out_channel = stdout in
-      let params = ({ width = !PredefOptions.width ; out_channel }) in
+      let params = F.({ width = !PredefOptions.width ; out_channel }) in
       F.output params root
     | Some fn ->
       let out_channel = open_out fn in
-      let params = ({ width = !PredefOptions.width ; out_channel }) in
+      let params = F.({ width = !PredefOptions.width ; out_channel }) in
       output_string out_channel disclaimer ;
       F.output params root ;
       close_out out_channel
@@ -182,13 +182,13 @@ module Tree (Params : sig val variants : bool val info : string end) = struct
     match !PredefOptions.output_file with
     | None ->
       let out_channel = stdout in
-      let params = ({ width ; out_channel ;
+      let params = F.({ width ; out_channel ;
                         use_variants_for_nodes ;
                         use_variants_for_leaves }) in
       F.output params root
     | Some fn ->
       let out_channel = open_out fn in
-      let params = ({ width ; out_channel ;
+      let params = F.({ width ; out_channel ;
                         use_variants_for_nodes ;
                         use_variants_for_leaves }) in
       output_string out_channel disclaimer ;
@@ -217,7 +217,7 @@ module Files = struct
     "-output-dir", Arg.Set_string base_output_dir,
     "\"dir\"&set the base output directory (defaults to \".\")"]
   let output root =
-    let params = ({ base_output_dir = !base_output_dir }) in
+    let params = F.({ base_output_dir = !base_output_dir }) in
     F.output params root
 end
 

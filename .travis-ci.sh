@@ -1,5 +1,5 @@
 # Edit this for your own project dependencies
-OPAM_DEPENDS="dune pprint astring"
+OPAM_DEPENDS="ocamlfind pprint ocp-build astring"
 
 case "$OCAML_VERSION,$OPAM_VERSION" in
 4.01.0,1.2.0) ppa=avsm/ocaml41+opam12 ;;
@@ -22,4 +22,7 @@ opam --git-version
 opam init
 opam install ${OPAM_DEPENDS}
 eval `opam config env`
-dune build
+make
+make clean
+ocp-build init
+ocp-build

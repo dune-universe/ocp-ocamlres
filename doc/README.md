@@ -14,8 +14,10 @@ Install:
 
  - Via OPAM (preferred): `opam install ocp-ocamlres`
  - Manually: you will need to install the `pprint` library and then
-   type `dune` and then `dune install`. You can also
-   build the documentation using `dune build @doc`.
+   type `make` and then `make install` or alternatively `make install
+   BINDIR="/path/to/bin" LIBDIR="/path/to/lib/ocaml"`. You can also
+   build the documentation using `make doc` and then `make
+   DOCDIR=/path/to/doc install-doc` if you want.
 
 Features:
 ---------
@@ -54,7 +56,7 @@ You want to embed these files in you application, so you run
 `ocp-ocamlres res -o appres.ml` to obtain an OCaml value `Appres.root`
 of type `string OCamlRes.Res.root`:
 
-```ocaml
+```
 let root = OCamlRes.Res.([
   Dir ("a", [
     Dir ("x", [ File ("test.int", "1234")]) ;
@@ -71,7 +73,7 @@ let root = OCamlRes.Res.([
 Alternatively, you can also run `ocp-ocamlres -format ocaml res -o res.ml`
  to select another output format and obtain:
 
-```ocaml
+```
 module A = struct
   module X = struct let test_int = "1234" end
   module Y = struct
@@ -96,7 +98,7 @@ subformat and the `.txt` files with the `lines` subformat
 `ocp-ocamlres -format ocaml res -o res.ml -subformat int int
 -subformat txt lines`
 
-```ocaml
+```
 module A = struct
   module Y = struct let tast_int = 9999 let test_int = 5678 end
   module X = struct let test_int = 1234 end
@@ -124,7 +126,7 @@ code. To solve this, the `ocamlres` format has two ways of working:
      `ocp-ocamlres -format ocamlres res -o res.ml -subformat int int
      -subformat txt lines -no-variants`
 
-```ocaml
+```
 type content =
   | Int of int
   | Lines of string list

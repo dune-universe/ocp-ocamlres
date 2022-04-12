@@ -18,7 +18,7 @@ module SM = Map.Make (String)
 
 (** Display help screen with options, formats, subformats and their options *)
 let help args usage =
-  let arg_parts (n, _t, msg) =
+  let arg_parts (n, t, msg) =
     try
       let i = String.index msg '&' in
       let n = n ^ " " ^ String.sub msg 0 i in

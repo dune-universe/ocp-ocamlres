@@ -1,0 +1,30 @@
+opam-version: "1.2"
+name: "ocp-ocamlres"
+version: "dev"
+maintainer: "benjamin@ocamlpro.com"
+authors: "benjamin@ocamlpro.com"
+homepage: "https://github.com/OCamlPro/ocp-ocamlres"
+bug-reports: "https://github.com/OCamlPro/ocp-ocamlres/issues"
+available: ocaml-version >= "4.01.0"
+depends: [
+  "dune" {>= "2.8"}
+  "ocaml" {>= "4.08.0"}
+  "pprint"
+  "astring"
+  "odoc" {with-doc}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/OCamlPro/ocp-ocamlres.git"

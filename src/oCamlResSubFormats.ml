@@ -48,7 +48,7 @@ module Raw = struct
   let from_raw _ raw_text = raw_text
   let to_raw _ raw_text = raw_text
 
-  let pprint _path data =
+  let pprint path data =
     let open PPrint in
     let len = String.length data in
     let looks_like_text =
@@ -116,8 +116,8 @@ module Raw = struct
             Bytes.set s 3 (hexd.(c land 15)) ;
             let s = Bytes.unsafe_to_string s in
             loop (acc ^^ chunk last i ^^ !^s) (i + 1) (i + 1)
-          | _c, _ when i = len - 1 -> acc ^^ chunk last (i + 1)
-          | _c, _ -> loop acc last (i + 1)
+          | c, _ when i = len - 1 -> acc ^^ chunk last (i + 1)
+          | c, _ -> loop acc last (i + 1)
       in
       group (align (!^"\"" ^^ loop empty 0 0 ^^ !^"\""))
   let pprint_header _ _ = None
