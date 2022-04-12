@@ -35,8 +35,6 @@
     recompiling it with / dynlinking a module performing a (sub)format
     registration at toplevel) *)
 
-open OCamlResFormats
-open OCamlResSubFormats
 
 (** {2 Formats registry} *)
 
@@ -49,10 +47,13 @@ open OCamlResSubFormats
     dedicated to use with the filesystem, so the type of data is fixed
     to strings representing the raw encoding of data. *)
 module type Format = sig
+  
   (** Leaves are raw data strings *)
   val output : string OCamlRes.Res.root -> unit
+
   (** A short dexcription for the help page *)
   val info : string
+
   (** The list of specific arguments, that are parsed before any call to {!output} *)
   val options : (Arg.key * Arg.spec * Arg.doc) list
 end
@@ -73,8 +74,10 @@ val formats : unit -> (module Format) Map.Make (String).t
 module type SubFormat = sig
   (** Leaves are raw data strings *)
   include OCamlResSubFormats.SubFormat
+
   (** A short dexcription for the help page *)
   val info : string
+
   (** The list of specific arguments *)
   val options : (Arg.key * Arg.spec * Arg.doc) list
 end

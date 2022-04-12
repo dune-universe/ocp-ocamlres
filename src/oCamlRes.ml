@@ -177,7 +177,7 @@ module Res = struct
       if name = Path.string_of_name n then data else find path ns
     | Dir (name, ns) :: ps, (d :: ds, f) ->
       if name = d then find (ds, f) ns else find path ps
-    | (Error _ | Dir _ | File _) :: ps, (_, Some n) ->
+    | (Error _ | Dir _ | File _) :: ps, (_, Some _n) ->
       find path ps
     | _, _ -> raise Not_found
 

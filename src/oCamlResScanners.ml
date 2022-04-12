@@ -34,7 +34,7 @@ module PathFilter = struct
       match dirs with
       | [] -> true
       | _ :: tl when lvl > 0 -> loop (pred lvl) tl
-      | _ :: tl -> false
+      | _ :: _tl -> false
     in
     fun path -> loop lvl (fst path)
   let has_extension (exts : string list) : t =
