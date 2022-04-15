@@ -21,6 +21,7 @@
  (name ocp-ocamlres)
  (synopsis "A simple tool and library to embed files and directories inside an OCaml executables")
  (description "A tool ocp-ocamlres to embed files and directories inside OCaml executables, with a companion library ocplib-ocamlres to manipulate them at run-time.")
+ (deprecated_package_names ocplib-ocamlres)
  (depends
   (ocaml (>= 4.01.0))
   pprint
